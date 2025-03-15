@@ -14,8 +14,7 @@ export default function App() {
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>{data ? "API Connectée" : "Chargement..."}</Text>
-      <p>cool</p>
+      <Text>{data ? "API Connectée, yes !" : "Chargement..."}</Text>
     </View>
   );
 }
