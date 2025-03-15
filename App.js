@@ -1,20 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { View, Text } from "react-native";
+import axios from "axios";
 
 export default function App() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get("https://backend-flyer-track.onrender.com/")
+      .then((response) => setData(response.data))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>{data ? "API Connectée" : "Chargement..."}</Text>
+      <p>cool</p>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
