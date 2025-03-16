@@ -1,4 +1,4 @@
-name: Publish Expo App
+name: Publish Mobile Update via EAS
 
 on:
   push:
@@ -16,5 +16,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Publish Expo app
-        run: npx expo publish
+      - name: Login to EAS
+        run: npx eas login --token ${{ secrets.EAS_TOKEN }}
+
+      - name: Publish update
+        run: npx eas update --branch production
