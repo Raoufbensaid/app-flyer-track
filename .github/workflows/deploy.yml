@@ -8,7 +8,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-
+    env:
+      EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -18,9 +19,6 @@ jobs:
 
       - name: Install EAS CLI
         run: npm install -g eas-cli
-
-      - name: Login to EAS
-        run: npx eas login ${{ secrets.EAS_TOKEN }}
 
       - name: Publish update
         run: npx eas update --branch production
