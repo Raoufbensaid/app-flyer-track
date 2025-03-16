@@ -20,5 +20,5 @@ jobs:
       - name: Install EAS CLI
         run: npm install -g eas-cli
 
-      - name: Publish update
-        run: npx eas update --branch production
+      - name: Publish update via EAS
+        run: npx eas update --branch production --non-interactive --message "Automatic OTA update from GitHub"
