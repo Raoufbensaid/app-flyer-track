@@ -1,20 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { View, Text } from "react-native";
-import axios from "axios";
+// App.js
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { AuthProvider } from "./context/AuthContext";
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import DashboardScreen from "./screens/DashboardScreen";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    axios
-      .get("https://backend-flyer-track.onrender.com/")
-      .then((response) => setData(response.data))
-      .catch((error) => console.error(error));
-  }, []);
-
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>{data ? "API Connectée, Token, Good !" : "Chargement..."}</Text>
-    </View>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{ title: "Accueil" }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ title: "Connexion" }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{ title: "Inscription" }}
+          />
+          <Stack.Screen
+            name="Dashboard"
+            component={DashboardScreen}
+            options={{ title: "Dashboard" }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
